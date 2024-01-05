@@ -31,7 +31,7 @@ public class ReadWriteProcessor extends Thread {
 	}
 
 	private void broadcast(SocketChannel sc) throws IOException {
-		ByteBufferPoolIF bufferPool = PoolManager.getByteBufferPool();
+		ByteBufferPool bufferPool = PoolManager.getByteBufferPool();
 		ByteBuffer buffer = null;
 		try {
 			buffer = bufferPool.getMemoryBuffer();

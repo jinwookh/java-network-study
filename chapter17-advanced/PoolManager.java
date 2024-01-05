@@ -24,12 +24,12 @@ public class PoolManager {
 		return (SelectorPoolIF) map.get(R"RequestSelectorPool", selectorPool);
 	}
 	
-	public static void registByteBufferPool(SelectorPoolIF selectorPool) {
-		map.put("ByteBufferPool", selectorPool);
+	public static void registByteBufferPool(ByteBufferPool byteBufferPool) {
+		map.put("ByteBufferPool", byteBufferPool);
 	}
 	
-	public static ByteBufferPoolIF getByteBufferPool(SelectorPoolIF selectorPool) {
-		return (SelectorPoolIF) map.get("ByteBufferPool", selectorPool);
+	public static ByteBufferPool getByteBufferPool(ByteBufferPool byteBufferPool) {
+		return (ByteBufferPool) map.get("ByteBufferPool", byteBufferPool);
 	}
 }
 

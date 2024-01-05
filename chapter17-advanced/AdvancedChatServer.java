@@ -5,7 +5,7 @@ public class AdvancedChatServer {
 	private Queue queue = null;
 	private SelectorPoolIF acceptSelectorPool = null;
 	private SelectorPoolIF requestSelectorPool = null;
-	private ByteBufferPoolIF byteBufferPool = null;
+	private ByteBufferPool byteBufferPool = null;
 
 	ThreadPoolIF acceptThreadPool = null;
 	ThreadPoolIF readWriteThreadPool = null;
