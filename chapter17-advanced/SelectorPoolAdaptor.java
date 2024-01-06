@@ -23,7 +23,7 @@ public abstract class SelectorPoolAdaptor implements SelectorPoolIF {
 			if (handler != null) {
 				pool.add(handler);
 			}
-			moniitor.notify();
+			monitor.notify();
 		}
 	}
 

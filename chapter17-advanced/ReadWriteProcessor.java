@@ -1,8 +1,8 @@
 import java.io.IOException;
-import java.nio.Bytebuffer;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
-import java.util.iterator;
+import java.util.Iterator;
 
 public class ReadWriteProcessor extends Thread {
 	private Queue queue = null;

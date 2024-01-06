@@ -11,13 +11,13 @@ public class ThreadPool implements ThreadPoolIF {
 	private final List pool = new ArrayList();
 
 	private Queue queue = null;
-	private String type = null;
+	private int type;
 
-	public ThreadPool(Queue queue, String type) {
+	public ThreadPool(Queue queue, int type) {
 		this(queue, type, 2, 10);
 	}
 
-	public ThreadPool(Queue queue, String type, int min, int max) {
+	public ThreadPool(Queue queue, int type, int min, int max) {
 		this.queue =  queue;
 		this.type = type;
 		this.min = min;
@@ -34,7 +34,10 @@ public class ThreadPool implements ThreadPoolIF {
 	private synchronized Thread createThread() {
 		Thread thread = null;
 		try { 
-			thread = (Thread) DynamicClassLoader.createInstance(type, queue);
+			if (type == NIOEvent.ACCEPT_EVENT)
+				thread = new AcceptProcessor(queue);
+			if (type == NIOEvent.READ_EVENT)
+				thread = new ReadWriteProcessor(queue);				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -60,7 +63,7 @@ public class ThreadPool implements ThreadPoolIF {
 				thread.interrupt();
 				thread = null;
 			}
-			pool.clear():
+			pool.clear();
 		}
 	}
 
@@ -77,7 +80,7 @@ public class ThreadPool implements ThreadPoolIF {
 	public void removeThread() {
 		synchronized (monitor) {
 			if (current > min) {
-				Thread t = (Thread) pool.remove(0)
+				Thread t = (Thread) pool.remove(0);
 				t.interrupt();
 				t = null;
 			}

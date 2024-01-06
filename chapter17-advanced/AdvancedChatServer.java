@@ -29,10 +29,10 @@ public class AdvancedChatServer {
 
 		queue = BlockingEventQueue.getInstance();
 
-		PoolMangager.registByteBufferPool(byteBufferPool);
+		PoolManager.registByteBufferPool(byteBufferPool);
 
-		acceptThreadPool = new ThreadPool(queue, "AcceptProcessor");
-		readWriteThreadPool = new ThreadPool(queue, "ReadWriteProcessor");
+		acceptThreadPool = new ThreadPool(queue, NIOEvent.ACCEPT_EVENT);
+		readWriteThreadPool = new ThreadPool(queue, NIOEvent.READ_EVENT);
 		acceptSelectorPool = new AcceptSelectorPool(queue);
 		requestSelectorPool = new RequestSelectorPool(queue);
 

@@ -1,4 +1,4 @@
-public interface selectorPoolIF {
+public interface SelectorPoolIF {
 	public Thread get();
 	public void put(Thread handler);
 	public int size();

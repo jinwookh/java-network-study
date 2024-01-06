@@ -3,7 +3,7 @@ import java.util.List;
 
 public class BlockingEventQueue implements Queue {
 	private final Object acceptMonitor = new Object();
-	private final Object readMonitor = new Object():
+	private final Object readMonitor = new Object();
 
 	private final List acceptQueue = new ArrayList();
 	private final List readQueue = new ArrayList();

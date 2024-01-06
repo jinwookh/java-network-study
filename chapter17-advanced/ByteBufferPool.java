@@ -25,7 +25,7 @@ public class ByteBufferPool {
 	private void initMemoryBuffer(int size) {
 		int bufferCount = size / MEMORY_BLOCKSIZE;
 		size = bufferCount * MEMORY_BLOCKSIZE;
-		Bytebuffer directBuf = ByteBuffer.allocateDirect(size);
+		ByteBuffer directBuf = ByteBuffer.allocateDirect(size);
 		divideBuffer(directBuf, MEMORY_BLOCKSIZE, memoryQueue);
 	}
 
@@ -65,7 +65,7 @@ public class ByteBufferPool {
 	private ByteBuffer getBuffer(ArrayList firstQueue, ArrayList secondQueue) {
 		ByteBuffer buffer = getBuffer(firstQueue, false);
 		if (buffer == null) {
-			buffer = getBuffer(secondQueue, flase);
+			buffer = getBuffer(secondQueue, false);
 			if (buffer == null) {
 				if(isWait)
 					buffer = getBuffer(firstQueue, true);
@@ -114,9 +114,9 @@ public class ByteBufferPool {
 		}
 	}
 
-	public synchronized void setWait(boolean wait) { this.isWait = wait; }
+	public synchronized void setWait(boolean wait) { this.isWait = isWait;
+	}
 	public synchronized boolean isWait() { return isWait; }
 }
 
-}
 

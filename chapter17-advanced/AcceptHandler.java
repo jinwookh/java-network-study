@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.io.InetSocketAddress;
+import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -24,8 +24,8 @@ public class AcceptHandler extends Thread {
 
 	private void init() {
 		try {
-			ServerSocket ssc = ServerSocketChannel.open();
-			ssc.configureBlocking(flase);
+			ServerSocketChannel ssc = ServerSocketChannel.open();
+			ssc.configureBlocking(false);
 
 			InetSocketAddress address = new InetSocketAddress("localhost", port);
 			ssc.socket().bind(address);
@@ -41,7 +41,7 @@ public class AcceptHandler extends Thread {
 		try {
 			while(!Thread.currentThread().isInterrupted()) {
 				int keysReady = selector.select();
-				acceptPendingConnections():
+				acceptPendingConnections();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class AcceptHandler extends Thread {
 		while (iter.hasNext()) {
 			SelectionKey key = (SelectionKey) iter.next();
 			iter.remove();
-			ServerSocketChannel readyChennel = (ServerSocketChannel) key.channel();
+			ServerSocketChannel readyChannel = (ServerSocketChannel) key.channel();
 			SocketChannel sc = readyChannel.accept();
 
 			System.out.println("@AcceptHandler(" + getName() + ") connection accepted from " + sc.socket().getInetAddress());

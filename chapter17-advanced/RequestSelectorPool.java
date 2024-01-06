@@ -2,15 +2,15 @@ import java.io.IOException;
 import java.nio.channels.Selector;
 import java.util.Iterator;
 
-public class AcceptSelectorPool extends SelectorPoolAdaptor {
+public class RequestSelectorPool extends SelectorPoolAdaptor {
 	private int port = 9090;
 	private Queue queue = null;
 
-	public AcceptSelectorPool(Queue queue) {
+	public RequestSelectorPool(Queue queue) {
 		this(queue, 1, 9090);
 	}
 
-	public AcceptSelectorPool(Queue queue, int size, int port) {
+	public RequestSelectorPool(Queue queue, int size, int port) {
 		super.size = size;
 		this.queue = queue;
 		this.port = port;
@@ -30,7 +30,7 @@ public class AcceptSelectorPool extends SelectorPoolAdaptor {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Thread handler = new AcceptHandler(queue, selector, port, index);
+		Thread handler = new RequestHandler(queue, selector, index);
 		return handler;
 	}
 
